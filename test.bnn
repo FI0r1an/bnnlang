@@ -1,0 +1,17 @@
+/* test.bnn */
+
+(out "type a number")
+
+(var num2guess 114514)
+(var num)
+
+(whiledo yes (;
+	(in num)
+	
+	(if (== num num2guess) (;
+		(out "right")
+		(leave)
+	) (;
+		(out "wrong")
+	))
+))

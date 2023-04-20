@@ -1,0 +1,8 @@
+program ::= {statement | ';'}
+
+call_name ::= front_part | KEYWORD | SYMBOL | ';'
+call_stmt ::= '(' call_name {front_part} ')'
+front_part ::= call_stmt | ANY_VALUE
+special_oper :: = "|>" | "=>" | "==>"
+optional_part ::= special_oper front_part
+statement ::= front_part {',' front_part} [optional_part]

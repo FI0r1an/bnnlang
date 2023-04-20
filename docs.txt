@@ -1,0 +1,37 @@
+program ::= {statement | ';'}
+
+call_name ::= front_part | KEYWORD | SYMBOL | ';'
+call_stmt ::= '(' call_name {front_part} ')'
+front_part ::= call_stmt | ANY_VALUE
+special_oper :: = "|>" | "=>" | "==>"
+optional_part ::= special_oper front_part
+statement ::= front_part {',' front_part} [optional_part]
+
+词法：
+	数字会被存储为 $ 数字进制 数字内容 的形式
+	字符串会被存储为 \字符串 的形式，目的是为了防止和关键字重名，导致虚拟机加载错误
+语法：
+	;代表空语句或空调用标识
+表达式运算：
+	未声明或不在当前作用域的变量，默认为nil，所有值为0
+	-和!跟在前缀部分之前，作为语法糖会被转换为(-/! ...)的形式
+调用语句：
+	块以;开头，并不会执行调用标识的内容
+	do：
+		以若干语句作为参数
+	lvar is rvar var：
+		至少有一个参数
+		lvar在栈中声明
+		rvar在寄存器中声明
+		var声明全局变量
+		is赋值给变量，不会进行分配
+	if：
+		第一个参数为表达式
+		第二个参数为代码块
+		第三个参数为可选的“否则”情况
+优化：
+TODO：
+	移除默认参数
+	栈
+	虚拟机
+	代码生成
